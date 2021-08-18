@@ -19,7 +19,6 @@ class List extends Component {
         fetch(url)
             .then(response => response.json())
             .then((jsonData) => {
-                console.log(jsonData)
                 this.setState({ data: jsonData, isLoading: false })
             })
             .catch((error) => {
