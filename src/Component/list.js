@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import { Spinner, Card } from 'react-bootstrap'
+import moment from 'moment'
+import '../App.css';
 
 class List extends Component {
     constructor(props) {
@@ -32,19 +34,39 @@ class List extends Component {
     }
 
     listCard = () => {
+        const { data } = this.state
         return (
-            <Card >
-                <Card.Body style={{ textAlign: 'left' }}>
-                    <Card.Title >Card Title</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                    </Card.Text>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
-                </Card.Body>
-            </Card>
+            <div className="list-container">
+                {
+                    data.map((d, index) => {
+                        return (
+                            <Card style={{ marginBottom: 5, cursor: 'pointer' }} onClick={() => window.open(d.html_url, '_blank')
+                            }>
+                                <Card.Body style={{ textAlign: 'left' }}>
+                                    <Card.Title >{d.name}</Card.Title>
+                                    {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
+                                    <Card.Text>
+                                        <div className="list-item-desc">{d.description}</div>
+
+
+                                        <div className="list-item-text">
+                                            {
+                                                d.language ?
+                                                    `language : ${d.language}`
+                                                    : ''
+                                            }
+
+                                        </div>
+                                        <div className="list-item-text">🕒 updated at {moment(d.updated_at).format("DD MMMM YYYY")}</div>
+                                    </Card.Text>
+
+                                </Card.Body>
+                            </Card>
+                        )
+                    })
+                }
+
+            </div >
         )
     }
 

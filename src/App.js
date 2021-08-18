@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <h3>Septianscp Repositories</h3>
+      <h3 className="app-title">Github Repositories</h3>
       <List />
     </div>
   );
