@@ -19,13 +19,11 @@ class List extends Component {
         fetch(url)
             .then(response => response.json())
             .then((jsonData) => {
-                // jsonData is parsed json object received from url
                 console.log(jsonData)
                 this.setState({ data: jsonData, isLoading: false })
             })
             .catch((error) => {
-                // handle your errors here
-                console.error(error)
+                alert(error)
             })
     }
 
@@ -44,7 +42,6 @@ class List extends Component {
                             }>
                                 <Card.Body style={{ textAlign: 'left' }}>
                                     <Card.Title >{d.name}</Card.Title>
-                                    {/* <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> */}
                                     <Card.Text>
                                         <div className="list-item-desc">{d.description}</div>
 
@@ -82,7 +79,10 @@ class List extends Component {
                             </Spinner>
                         </div>
                         :
-                        this.listCard()
+                        !isLoading && data.length == 0 ?
+                            "Data tidak ada"
+                            :
+                            this.listCard()
                 }
             </div>
         )
